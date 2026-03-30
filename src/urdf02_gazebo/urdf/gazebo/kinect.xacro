@@ -1,0 +1,63 @@
+<robot name="my_sensors" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!--
+      Gazebo 深度相机插件配置（Kinect/OpenNI）
+      这里把雷达支架 link：support 当作深度相机挂载点
+    -->
+    <gazebo reference="support">
+      <!-- depth 传感器：可输出 RGB、Depth、PointCloud -->
+      <sensor type="depth" name="kinect_depth">
+        <!-- 是否常开 -->
+        <always_on>true</always_on>
+        <!-- Gazebo 传感器内部刷新频率（Hz） -->
+        <update_rate>20.0</update_rate>
+
+        <!-- 相机光学参数 -->
+        <camera>
+          <!-- 视场角（弧度，约 60 度） -->
+          <horizontal_fov>1.04719755</horizontal_fov>
+          <image>
+            <!-- 图像格式与分辨率 -->
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <!-- 深度可感知范围（米） -->
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+        </camera>
+
+        <!-- ROS 插件：把 Gazebo 数据发布到 ROS 话题 -->
+        <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+          <!-- 相机命名空间前缀 -->
+          <cameraName>kinect</cameraName>
+          <alwaysOn>true</alwaysOn>
+          <!-- ROS 侧发布频率（Hz） -->
+          <updateRate>10</updateRate>
+
+          <!-- 话题名 -->
+          <imageTopicName>rgb/image_raw</imageTopicName>
+          <depthImageTopicName>depth/image_raw</depthImageTopicName>
+          <pointCloudTopicName>depth/points</pointCloudTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+          <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+
+          <!-- TF 坐标系：与挂载 link 一致 -->
+          <frameName>support_depth</frameName>
+
+          <!-- 双目/深度模型参数与畸变参数 -->
+          <baseline>0.1</baseline>
+          <distortion_k1>0.0</distortion_k1>
+          <distortion_k2>0.0</distortion_k2>
+          <distortion_k3>0.0</distortion_k3>
+          <distortion_t1>0.0</distortion_t1>
+          <distortion_t2>0.0</distortion_t2>
+
+          <!-- 小于该值的点云将被裁剪 -->
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+</robot>

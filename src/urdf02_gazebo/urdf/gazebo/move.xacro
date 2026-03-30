@@ -1,0 +1,42 @@
+<robot name="my_car_move" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!--
+      Gazebo 差速驱动插件
+      订阅 cmd_vel，发布 odom 与 TF，驱动左右轮关节转动
+    -->
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <!-- 插件日志等级 -->
+            <rosDebugLevel>Info</rosDebugLevel>
+            <!-- ROS 命名空间，/ 表示全局 -->
+            <robotNamespace>/</robotNamespace>
+            <alwaysOn>true</alwaysOn>
+            <!-- 控制器更新频率（Hz） -->
+            <updateRate>50.0</updateRate>
+            <legacyMode>false</legacyMode>
+
+            <!-- 左右驱动轮关节名（必须与模型中 joint 名一致） -->
+            <leftJoint>base_l_wheel_joint</leftJoint>
+            <rightJoint>base_r_wheel_joint</rightJoint>
+            <!-- 几何参数：轮距与轮径 -->
+            <wheelSeparation>${base_link_radius * 2}</wheelSeparation>
+            <wheelDiameter>${wheel_radius * 2}</wheelDiameter>
+
+            <!-- 驱动参数 -->
+            <wheelTorque>20</wheelTorque>
+            <wheelAcceleration>1.0</wheelAcceleration>
+
+            <!-- 话题与坐标系 -->
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+
+            <!-- 发布选项 -->
+            <publishTf>true</publishTf>
+            <publishWheelTF>false</publishWheelTF>
+            <publishWheelJointState>true</publishWheelJointState>
+        </plugin>
+    </gazebo>
+
+</robot>

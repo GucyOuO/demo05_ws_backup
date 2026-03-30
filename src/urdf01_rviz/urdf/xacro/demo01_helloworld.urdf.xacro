@@ -1,0 +1,308 @@
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- 
+        robot:
+        整个机器人模型的根标签，所有 link、joint、xacro 宏等内容都要写在里面。
+
+        name="mycar":
+        机器人名字，给这个模型起名为 mycar。
+
+        xmlns:xacro="http://wiki.ros.org/xacro":
+        声明这是一个 xacro 文件。
+        有了这一句之后，后面才能使用：
+        1. xacro:property   —— 定义属性/变量
+        2. xacro:macro      —— 定义宏
+        3. xacro:xxx        —— 调用宏
+    -->
+
+
+    <!-- ========================= -->
+    <!-- 1. 属性封装（定义全局变量） -->
+    <!-- ========================= -->
+
+    <!-- 
+        wheel_radius:
+        车轮半径，单位是米。
+        这里定义为 0.0325m，也就是 3.25cm。
+    -->
+    <xacro:property name="wheel_radius" value="0.0325" />
+
+    <!-- 
+        wheel_length:
+        车轮宽度（圆柱体长度）。
+        这里写成了 0.0015m，也就是 1.5mm。
+        这个值非常小，轮子会看起来特别薄。
+        你大概率本来想写的是 0.015（1.5cm）。
+    -->
+    <xacro:property name="wheel_length" value="0.0015" />
+
+    <!-- 
+        PI:
+        圆周率常量。
+        后面会用它来写弧度制旋转角，比如 PI/2 = 90度。
+    -->
+    <xacro:property name="PI" value="3.1415927" />
+
+    <!-- 
+        base_link_length:
+        车体高度（注意：从你后面公式的使用方式来看，
+        你这里实际上把它当成“车体圆柱的长度/高度”在用）。
+        后面用于计算轮子的 z 方向安装位置。
+    -->
+    <xacro:property name="base_link_length" value="0.08" />
+
+    <!-- 
+        lidi_space:
+        离地间隙（你这里命名应该是想表达 little_space / ground_space 一类的意思）。
+        表示车体底部和地面之间预留的高度。
+        后面参与计算轮子中心在 z 方向上的偏移。
+    -->
+    <xacro:property name="lidi_space" value="0.015" />
+
+
+    <!-- ========================= -->
+    <!-- 2. 宏定义：封装“一个轮子” -->
+    <!-- ========================= -->
+
+    <!-- 
+        xacro:macro:
+        定义一个可复用的宏，相当于“模板”或“函数”。
+
+        name="wheel_func":
+        宏名称叫 wheel_func，以后可以通过 <xacro:wheel_func ... /> 调用。
+
+        params="wheel_name flag":
+        这个宏有两个参数：
+
+        1. wheel_name
+           用来给轮子命名，比如 left、right。
+           最后生成的 link 名称会是：
+           left_wheel / right_wheel
+
+        2. flag
+           符号位，用来控制轮子在 y 方向放左边还是右边。
+           - 左轮时 flag=1
+           - 右轮时 flag=-1
+
+           这样 y 坐标就可以统一写成：
+           ${0.1 * flag}
+
+           左轮 = 0.1
+           右轮 = -0.1
+    -->
+    <xacro:macro name="wheel_func" params="wheel_name flag">
+
+        <!-- ========================= -->
+        <!-- 2-1. 定义轮子的 link -->
+        <!-- ========================= -->
+
+        <!-- 
+            link:
+            机器人中的“刚体部件”。
+            这里定义的是一个轮子部件。
+
+            name="${wheel_name}_wheel":
+            使用传入的参数 wheel_name 来动态生成 link 名字。
+            例如：
+            wheel_name="left"  -> left_wheel
+            wheel_name="right" -> right_wheel
+        -->
+        <link name="${wheel_name}_wheel">
+
+            <!-- 
+                visual:
+                可视化模型，用于在 RViz/Gazebo 中显示外观。
+                注意：
+                visual 只负责“看起来是什么样”，
+                不负责碰撞，不负责动力学惯性。
+            -->
+            <visual>
+
+                <!-- 
+                    geometry:
+                    定义几何外形。
+                    这里用 cylinder（圆柱体）来表示轮子。
+                -->
+                <geometry>
+
+                    <!-- 
+                        cylinder:
+                        圆柱体模型。
+
+                        radius="${wheel_radius}":
+                        使用前面定义的全局属性作为轮子半径。
+
+                        length="${wheel_length}":
+                        使用前面定义的全局属性作为轮子宽度。
+                    -->
+                    <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+                </geometry>
+
+                <!-- 
+                    origin:
+                    定义“visual 几何体”相对于当前 link 坐标系的位姿。
+
+                    xyz="0 0 0":
+                    表示这个圆柱体的中心，放在当前 link 坐标系原点上。
+
+                    rpy="${PI / 2} 0 0":
+                    表示绕 x 轴旋转 90 度。
+
+                    为什么要转 90 度？
+                    因为 cylinder 默认的轴线方向通常是 z 轴方向。
+                    而车轮一般要“横着放”，让轮轴沿 y 轴或 x 轴方向，
+                    所以这里要旋转一下，让轮子姿态正确。
+                -->
+                <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+
+                <!-- 
+                    material:
+                    定义材质/颜色。
+
+                    name="wheel_color":
+                    材质名字叫 wheel_color。
+                    如果多个地方使用同名材质，通常表示想复用这个材质。
+                -->
+                <material name="wheel_color">
+
+                    <!-- 
+                        color:
+                        rgba = 红 绿 蓝 透明度
+
+                        0 0 0 表示黑色
+                        最后一个 0.3 表示透明度 30%
+
+                        注意：
+                        这个值会让轮子看起来偏灰、偏淡、半透明。
+                        如果你想要纯黑轮子，建议写成：
+                        rgba="0 0 0 1"
+                    -->
+                    <color rgba="0 0 0 0.3" />
+                </material>
+            </visual>
+        </link>
+
+
+        <!-- ========================= -->
+        <!-- 2-2. 定义轮子与车体的 joint -->
+        <!-- ========================= -->
+
+        <!-- 
+            joint:
+            用来连接两个 link，描述它们之间的相对运动关系。
+
+            name="${wheel_name}2link":
+            动态生成 joint 名字。
+            例如：
+            left2link
+            right2link
+        -->
+        <joint name="${wheel_name}2link" type="continuous">
+
+            <!-- 
+                parent:
+                父链接。
+                这里轮子是挂在 base_link 上的，
+                所以 base_link 是父链接。
+            -->
+            <parent link="base_link" />
+
+            <!-- 
+                child:
+                子链接。
+                这里子链接就是当前定义的轮子 link。
+            -->
+            <child link="${wheel_name}_wheel" />
+
+            <!-- 
+                origin:
+                定义“子链接坐标系”相对于“父链接坐标系”的位姿。
+
+                这和上面 visual 里的 origin 完全不是一回事，必须分清：
+
+                - visual/origin:
+                  调整“这个几何体在本 link 里怎么摆”
+
+                - joint/origin:
+                  调整“这个 link 整体安装到父 link 的什么位置”
+
+                xyz:
+                轮子中心相对于 base_link 坐标系原点的位置。
+
+                x = 0
+                    表示轮子不前后偏移，位于车体中部。
+
+                y = 0.1 * flag
+                    表示左右偏移：
+                    左轮  =  0.1
+                    右轮  = -0.1
+
+                z = -(base_link_length / 2 + lidi_space - wheel_radius)
+
+                    这个公式是在计算轮子中心的高度位置，目的是让轮子和车体的相对位置合理。
+
+                    base_link_length / 2:
+                    车体“半高”
+
+                    + lidi_space:
+                    再往下留出离地间隙
+
+                    - wheel_radius:
+                    因为轮子中心到底面的距离等于轮子半径，
+                    所以这里要减去半径
+
+                    最后整体乘 -1：
+                    因为你想让轮子在车体坐标系原点“下面”，
+                    所以 z 要是负值
+            -->
+            <origin xyz="0 ${0.1 * flag} ${(base_link_length / 2 + lidi_space - wheel_radius) * -1}" rpy="0 0 0" />
+
+            <!-- 
+                axis:
+                定义关节的旋转轴方向。
+
+                xyz="0 1 0":
+                表示轮子绕 y 轴旋转。
+
+                对于这种轮子模型，这通常表示：
+                轮轴方向沿 y 轴，
+                轮子围绕 y 轴转动。
+            -->
+            <axis xyz="0 1 0" />
+        </joint>
+
+    </xacro:macro>
+
+
+    <!-- ========================= -->
+    <!-- 3. 调用宏，生成左右两个轮子 -->
+    <!-- ========================= -->
+
+    <!-- 
+        调用 wheel_func 宏，生成左轮。
+
+        wheel_name="left":
+        所以会生成：
+        link  -> left_wheel
+        joint -> left2link
+
+        flag="1":
+        所以 y = 0.1 * 1 = 0.1
+        表示轮子在车体左侧（按你当前坐标系定义）
+    -->
+    <xacro:wheel_func wheel_name="left" flag="1" />
+
+    <!-- 
+        调用 wheel_func 宏，生成右轮。
+
+        wheel_name="right":
+        所以会生成：
+        link  -> right_wheel
+        joint -> right2link
+
+        flag="-1":
+        所以 y = 0.1 * (-1) = -0.1
+        表示轮子在车体右侧
+    -->
+    <xacro:wheel_func wheel_name="right" flag="-1" />
+
+</robot>

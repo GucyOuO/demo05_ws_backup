@@ -1,0 +1,49 @@
+<robot name="my_sensors" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!--
+    Gazebo 激光雷达插件配置
+    reference="laser" 必须和机器人里激光 link 名称一致（demo07_car_laser.urdf.xacro 中是 laser）
+  -->
+  <gazebo reference="laser">
+    <!-- type="ray" 表示 2D 激光雷达 -->
+    <sensor type="ray" name="rplidar">
+      <!-- 传感器相对 laser link 的位姿 -->
+      <pose>0 0 0 0 0 0</pose>
+      <!-- 在 Gazebo 中显示雷达扫描射线 -->
+      <visualize>true</visualize>
+      <!-- 雷达发布频率（Hz） -->
+      <update_rate>10.0</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <!-- 360 束激光，近似 1 度分辨率 -->
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <!-- 水平扫描角范围：-pi ~ +pi -->
+            <min_angle>-3</min_angle>
+            <max_angle>3</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <!-- 距离量程（米） -->
+          <min>0.10</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <!-- 高斯噪声模型 -->
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+
+      <!-- ROS 激光插件：将 Gazebo 传感器数据发布到 ROS 话题 -->
+      <plugin name="gazebo_rplidar" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

@@ -1,0 +1,23 @@
+<launch>
+  <arg name="start_gazebo" default="true" />
+  <arg name="model_name" default="mycar" />
+  <arg name="x" default="0.0" />
+  <arg name="y" default="0.0" />
+  <arg name="z" default="0.2" />
+
+  <!-- 将 URDF 加载到参数服务器 -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find urdf02_gazebo)/urdf/car.urdf.xacro" />
+
+  <!-- 启动 Gazebo 空场景（如果已手动启动 Gazebo，可将 start_gazebo:=false） -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg start_gazebo)">
+    <arg name="paused" value="false" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="gui" value="true" />
+    <arg name="headless" value="false" />
+    <arg name="debug" value="false" />
+  </include>
+
+  <!-- 将机器人从 robot_description 生成到 Gazebo -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" output="screen"
+        args="-urdf -param robot_description -model $(arg model_name) -x $(arg x) -y $(arg y) -z $(arg z)" />
+</launch>

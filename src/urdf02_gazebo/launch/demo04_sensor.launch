@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="tf2_ros" name="static_transform_publisher" type="static_transform_publisher" args="0 0 0 -1.57 0 -1.57 /support /support"/>
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find urdf01_rviz)/config/show_mycar.rviz"/>
+    <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
+</launch>
