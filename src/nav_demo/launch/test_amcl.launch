@@ -1,0 +1,49 @@
+<launch>
+    <!--
+      AMCL 定位测试一键启动文件
+      功能：
+      1) 启动静态地图服务（map_server）
+      2) 启动 AMCL 粒子滤波定位（发布 map->odom）
+      3) 启动 RViz 可视化（默认加载 nav.rviz）
+
+      使用前提：
+      - 已有底盘与传感器节点在运行（至少包含 /scan、/tf、/odom）
+      - 机器人模型参数 robot_description 已加载（供 RViz RobotModel 显示）
+    -->
+
+    <!-- 地图文件名（位于 $(find nav_demo)/map/ 下） -->
+    <arg name="map" default="nav.yaml" />
+
+    <!-- RViz 配置文件路径 -->
+    <arg name="rviz_config" default="$(find nav_demo)/config/nav.rviz" />
+
+    <!--
+      1) 启动地图服务
+      复用 nav03_map_server.launch，保持地图加载逻辑一致，避免重复维护。
+    -->
+    <include file="$(find nav_demo)/launch/nav03_map_server.launch">
+        <arg name="map" value="$(arg map)" />
+    </include>
+
+    <!--
+      2) 启动 AMCL 定位
+      复用 nav04_amcl.launch 中已调好的定位参数。
+      AMCL 会融合激光与里程计，持续估计机器人在 map 坐标系中的位姿。
+    -->
+    <include file="$(find nav_demo)/launch/nav04_amcl.launch" />
+
+    <!--
+      3) 发布机器人关节与 TF
+      - joint_state_publisher：发布 /joint_states（无硬件回传时可用于可视化）
+      - robot_state_publisher：基于 robot_description + /joint_states 发布机器人各连杆 TF
+      说明：需要在其他位置已加载 robot_description 参数（URDF/Xacro）。
+    -->
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <!--
+      4) 启动 RViz
+      默认打开 nav.rviz，便于直接使用 2D Pose Estimate 给 AMCL 初始化位姿。
+    -->
+    <node pkg="rviz" type="rviz" name="rviz" />
+</launch>

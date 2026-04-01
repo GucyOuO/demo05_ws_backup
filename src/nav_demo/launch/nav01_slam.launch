@@ -1,0 +1,73 @@
+<launch>
+    <!--
+      SLAM 建图启动文件（gmapping）
+      前置条件：
+      1) 已有里程计 TF：odom -> base_footprint
+      2) 已有激光数据话题：/scan
+      3) 已有机器人模型参数 robot_description（供 state_publisher 使用）
+    -->
+    <param name="use_sim_time" value="true"/> <!-- 使用仿真时间 /clock -->
+
+    <!-- gmapping：订阅激光+里程计，发布地图 map 与 map->odom -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+      <!-- 激光输入话题 -->
+      <remap from="scan" to="scan"/>
+
+      <!-- 坐标系配置 -->
+      <param name="base_frame" value="base_footprint"/><!-- 机器人基坐标系 -->
+      <param name="odom_frame" value="odom"/> <!-- 里程计坐标系 -->
+
+      <!-- 地图更新与激光量程 -->
+      <param name="map_update_interval" value="5.0"/>
+      <param name="maxUrange" value="16.0"/>
+
+      <!-- 扫描匹配相关参数 -->
+      <param name="sigma" value="0.05"/>
+      <param name="kernelSize" value="1"/>
+      <param name="lstep" value="0.05"/>
+      <param name="astep" value="0.05"/>
+      <param name="iterations" value="5"/>
+      <param name="lsigma" value="0.075"/>
+      <param name="ogain" value="3.0"/>
+      <param name="lskip" value="0"/>
+
+      <!-- 运动模型噪声参数 -->
+      <param name="srr" value="0.1"/>
+      <param name="srt" value="0.2"/>
+      <param name="str" value="0.1"/>
+      <param name="stt" value="0.2"/>
+
+      <!-- 触发一次 scan 匹配/更新地图的阈值 -->
+      <param name="linearUpdate" value="1.0"/>
+      <param name="angularUpdate" value="0.5"/>
+      <param name="temporalUpdate" value="3.0"/>
+
+      <!-- 粒子滤波参数 -->
+      <param name="resampleThreshold" value="0.5"/>
+      <param name="particles" value="30"/>
+
+      <!-- 地图边界与分辨率 -->
+      <param name="xmin" value="-50.0"/>
+      <param name="ymin" value="-50.0"/>
+      <param name="xmax" value="50.0"/>
+      <param name="ymax" value="50.0"/>
+      <param name="delta" value="0.05"/>
+
+      <!-- 似然采样范围 -->
+      <param name="llsamplerange" value="0.01"/>
+      <param name="llsamplestep" value="0.01"/>
+      <param name="lasamplerange" value="0.005"/>
+      <param name="lasamplestep" value="0.005"/>
+    </node>
+
+    <!-- 发布关节状态和机器人 TF（需要 robot_description） -->
+    <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- 可视化 -->
+    <node pkg="rviz" type="rviz" name="rviz" />
+    <!-- 可使用固定 rviz 配置文件 -->
+    <!--
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find my_nav_sum)/rviz/gmapping.rviz"/>
+    -->
+</launch>
