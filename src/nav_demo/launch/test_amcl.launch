@@ -18,15 +18,10 @@
     <!-- 是否在本文件内一并启动 Gazebo 与机器人模型 -->
     <arg name="start_gazebo" default="true" />
 
-    <!--
-      地图基名（不带后缀），一处切换 map + world。
-      例如：random_complex_01 / random_complex_02 / random_complex_03
-    -->
-    <arg name="map_stem" default="random_complex_03" />
-    <!-- 地图文件名（位于 $(find nav_demo)/map/ 下） -->
-    <arg name="map" default="$(arg map_stem).yaml" />
+    <!-- 地图文件名（位于 $(find nav_demo)/map/ 下），默认使用 RViz 建图保存的 nav.yaml -->
+    <arg name="map" default="nav.yaml" />
     <!-- Gazebo 场景文件名（位于 $(find urdf02_gazebo)/worlds/ 下） -->
-    <arg name="world" default="$(arg map_stem).world" />
+    <arg name="world" default="box_house.world" />
 
     <!-- RViz 配置文件路径 -->
     <arg name="rviz_config" default="$(find nav_demo)/config/nav.rviz" />

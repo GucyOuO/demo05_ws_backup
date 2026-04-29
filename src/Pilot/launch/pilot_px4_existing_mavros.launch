@@ -1,0 +1,27 @@
+<launch>
+  <!--
+    pilot_px4_existing_mavros.launch（深度学习注释版）
+    ==================================================
+
+    场景：
+    你已经“手动”在别的终端启动好了：
+    - PX4 SITL + Gazebo
+    - MAVROS
+
+    这个 launch 只启动我们的教学 Offboard 节点，便于你分步学习。
+  -->
+
+  <arg name="target_x" default="0.0"/>
+  <arg name="target_y" default="0.0"/>
+  <arg name="target_z" default="2.0"/>
+
+  <node pkg="Pilot"
+        type="px4_offboard_teacher.py"
+        name="px4_offboard_teacher"
+        output="screen">
+    <param name="target_x" value="$(arg target_x)"/>
+    <param name="target_y" value="$(arg target_y)"/>
+    <param name="target_z" value="$(arg target_z)"/>
+    <param name="rate_hz" value="20.0"/>
+  </node>
+</launch>

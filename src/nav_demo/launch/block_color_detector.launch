@@ -1,0 +1,36 @@
+<launch>
+    <!--
+      物块颜色识别节点。
+
+      默认使用当前仿真小车里的 RGB-D/Kinect 相机：
+      - RGB 图像：/kinect/rgb/image_raw
+      - 深度图像：/kinect/depth/image_raw
+      - 相机内参：/kinect/rgb/camera_info
+
+      查看调试图像：
+        rqt_image_view /block_color_detector/debug_image
+
+      查看识别结果：
+        rostopic echo /block_color_detector/detections
+    -->
+
+    <arg name="rgb_topic" default="/kinect/rgb/image_raw" />
+    <arg name="depth_topic" default="/kinect/depth/image_raw" />
+    <arg name="camera_info_topic" default="/kinect/rgb/camera_info" />
+
+    <!-- 小于这个像素面积的轮廓会被当成噪声忽略 -->
+    <arg name="min_area" default="600" />
+
+    <!-- 根据像素面积粗分 small / medium / large -->
+    <arg name="small_area" default="2500" />
+    <arg name="large_area" default="9000" />
+
+    <node pkg="nav_demo" type="block_color_detector.py" name="block_color_detector" output="screen">
+        <param name="rgb_topic" value="$(arg rgb_topic)" />
+        <param name="depth_topic" value="$(arg depth_topic)" />
+        <param name="camera_info_topic" value="$(arg camera_info_topic)" />
+        <param name="min_area" value="$(arg min_area)" />
+        <param name="small_area" value="$(arg small_area)" />
+        <param name="large_area" value="$(arg large_area)" />
+    </node>
+</launch>

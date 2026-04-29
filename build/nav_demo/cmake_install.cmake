@@ -52,3 +52,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/nav_demo" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/nav_demo/package.xml")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/nav_demo" TYPE PROGRAM FILES "/home/zzg/demo05_ws_backup/build/nav_demo/catkin_generated/installspace/block_color_detector.py")
+endif()
+

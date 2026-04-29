@@ -98,6 +98,9 @@
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>joint_state_publisher</exec_depend>
   <exec_depend>map_server</exec_depend>
+  <!-- PX4 + MAVROS 链路运行时依赖（未安装时，相关 launch/脚本会报包缺失） -->
+  <exec_depend>mavros</exec_depend>
+  <exec_depend>mavros_msgs</exec_depend>
   <exec_depend>move_base</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>

@@ -1,0 +1,72 @@
+<launch>
+  <!--
+    pilot_px4_sitl_mavros.launch（深度学习注释版）
+    ================================================
+
+    目的：
+    1) 启动 PX4 SITL + Gazebo
+    2) 启动 MAVROS 桥接
+    3) （可选）启动我们写的教学版 Offboard 节点
+
+    ============================================================
+    一、整体链路（先理解这个图）
+    ============================================================
+    ROS 节点(你写的控制) <-> MAVROS <-> MAVLink UDP <-> PX4 SITL <-> Gazebo
+
+    你发的 /mavros/setpoint_* 会通过 MAVROS 转成 MAVLink 给 PX4。
+    PX4 再把姿态/电机控制作用到 Gazebo 中的无人机模型。
+
+    ============================================================
+    二、重要说明
+    ============================================================
+    1) 本 launch 依赖你本机已有 PX4 仓库（含 mavros_posix_sitl.launch）。
+    2) 本 launch 依赖 mavros/mavros_msgs 已安装。
+    3) 如果你还没装 mavros，先安装后再跑。
+  -->
+
+  <!-- PX4 固件目录（按你本机实际路径改） -->
+  <arg name="px4_dir" default="$(env HOME)/PX4-Autopilot"/>
+
+  <!-- PX4 机型，常见 iris / iris_fpv_cam / typhoon_h480 -->
+  <arg name="vehicle" default="iris"/>
+
+  <!-- Gazebo 世界文件（默认用你的随机复杂地图 world） -->
+  <arg name="world" default="$(find urdf02_gazebo)/worlds/random_complex_01.world"/>
+
+  <!-- 是否自动启动教学版 offboard 控制脚本 -->
+  <arg name="start_offboard" default="true"/>
+
+  <!-- Offboard 目标点（ENU） -->
+  <arg name="target_x" default="0.0"/>
+  <arg name="target_y" default="0.0"/>
+  <arg name="target_z" default="2.0"/>
+
+  <!--
+    复用 PX4 官方启动文件：mavros_posix_sitl.launch
+    这份文件通常位于：
+    $(px4_dir)/launch/mavros_posix_sitl.launch
+
+    关键参数：
+    - vehicle: PX4 启动哪种机型
+    - world: Gazebo 场景
+  -->
+  <include file="$(arg px4_dir)/launch/mavros_posix_sitl.launch">
+    <arg name="vehicle" value="$(arg vehicle)"/>
+    <arg name="world" value="$(arg world)"/>
+  </include>
+
+  <!--
+    教学 Offboard 节点（可选）
+    功能：自动预发送 setpoint、切 OFFBOARD、解锁并悬停到目标点
+  -->
+  <node if="$(arg start_offboard)"
+        pkg="Pilot"
+        type="px4_offboard_teacher.py"
+        name="px4_offboard_teacher"
+        output="screen">
+    <param name="target_x" value="$(arg target_x)"/>
+    <param name="target_y" value="$(arg target_y)"/>
+    <param name="target_z" value="$(arg target_z)"/>
+    <param name="rate_hz" value="20.0"/>
+  </node>
+</launch>
