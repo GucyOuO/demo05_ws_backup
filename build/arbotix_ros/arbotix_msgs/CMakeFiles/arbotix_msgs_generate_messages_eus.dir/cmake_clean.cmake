@@ -1,11 +1,11 @@
 file(REMOVE_RECURSE
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/manifest.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/msg/Analog.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/msg/Digital.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/srv/Enable.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/srv/Relax.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/srv/SetSpeed.l"
-  "/home/zzg/demo05_ws/devel/share/roseus/ros/arbotix_msgs/srv/SetupChannel.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/manifest.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/msg/Analog.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/msg/Digital.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/srv/Enable.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/srv/Relax.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/srv/SetSpeed.l"
+  "/home/zzg/demo05_ws_backup/devel/share/roseus/ros/arbotix_msgs/srv/SetupChannel.l"
   "CMakeFiles/arbotix_msgs_generate_messages_eus"
 )
 

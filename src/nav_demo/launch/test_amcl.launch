@@ -11,11 +11,34 @@
       - 机器人模型参数 robot_description 已加载（供 RViz RobotModel 显示）
     -->
 
+    <!-- 是否使用仿真时间（Gazebo 场景建议为 true） -->
+    <arg name="use_sim_time" default="true" />
+    <param name="use_sim_time" value="$(arg use_sim_time)" />
+
+    <!-- 是否在本文件内一并启动 Gazebo 与机器人模型 -->
+    <arg name="start_gazebo" default="true" />
+
+    <!--
+      地图基名（不带后缀），一处切换 map + world。
+      例如：random_complex_01 / random_complex_02 / random_complex_03
+    -->
+    <arg name="map_stem" default="random_complex_03" />
     <!-- 地图文件名（位于 $(find nav_demo)/map/ 下） -->
-    <arg name="map" default="nav.yaml" />
+    <arg name="map" default="$(arg map_stem).yaml" />
+    <!-- Gazebo 场景文件名（位于 $(find urdf02_gazebo)/worlds/ 下） -->
+    <arg name="world" default="$(arg map_stem).world" />
 
     <!-- RViz 配置文件路径 -->
     <arg name="rviz_config" default="$(find nav_demo)/config/nav.rviz" />
+
+    <!--
+      0) （可选）启动 Gazebo 环境与机器人
+      复用 urdf02_gazebo 的 demo03_env.launch。
+    -->
+    <include file="$(find urdf02_gazebo)/launch/demo03_env.launch" if="$(arg start_gazebo)">
+        <arg name="start_gazebo" value="true" />
+        <arg name="world" value="$(arg world)" />
+    </include>
 
     <!--
       1) 启动地图服务
@@ -32,6 +55,9 @@
     -->
     <include file="$(find nav_demo)/launch/nav04_amcl.launch" />
 
+    <include file="$(find nav_demo)/launch/nav05_path.launch" />
+
+
     <!--
       3) 发布机器人关节与 TF
       - joint_state_publisher：发布 /joint_states（无硬件回传时可用于可视化）
@@ -45,5 +71,5 @@
       4) 启动 RViz
       默认打开 nav.rviz，便于直接使用 2D Pose Estimate 给 AMCL 初始化位姿。
     -->
-    <node pkg="rviz" type="rviz" name="rviz" />
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config)" />
 </launch>

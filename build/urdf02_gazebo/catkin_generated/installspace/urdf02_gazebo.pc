@@ -1,4 +1,4 @@
-prefix=/home/zzg/demo05_ws/install
+prefix=/home/zzg/demo05_ws_backup/install
 
 Name: urdf02_gazebo
 Description: Description of urdf02_gazebo

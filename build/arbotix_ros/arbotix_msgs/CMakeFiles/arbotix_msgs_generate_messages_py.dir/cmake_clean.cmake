@@ -1,12 +1,12 @@
 file(REMOVE_RECURSE
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/msg/_Analog.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/msg/_Digital.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/msg/__init__.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/srv/_Enable.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/srv/_Relax.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/srv/_SetSpeed.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/srv/_SetupChannel.py"
-  "/home/zzg/demo05_ws/devel/lib/python3/dist-packages/arbotix_msgs/srv/__init__.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/msg/_Analog.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/msg/_Digital.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/msg/__init__.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/srv/_Enable.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/srv/_Relax.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/srv/_SetSpeed.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/srv/_SetupChannel.py"
+  "/home/zzg/demo05_ws_backup/devel/lib/python3/dist-packages/arbotix_msgs/srv/__init__.py"
   "CMakeFiles/arbotix_msgs_generate_messages_py"
 )
 

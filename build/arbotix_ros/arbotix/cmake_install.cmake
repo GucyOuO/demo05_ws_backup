@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/arbotix_ros/arbotix
+# Install script for directory: /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,6 +38,6 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix" TYPE FILE FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix/package.xml")
 endif()
 

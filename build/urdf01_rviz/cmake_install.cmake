@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/urdf01_rviz
+# Install script for directory: /home/zzg/demo05_ws_backup/src/urdf01_rviz
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/urdf01_rviz/catkin_generated/installspace/urdf01_rviz.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/urdf01_rviz/catkin_generated/installspace/urdf01_rviz.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/urdf01_rviz/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/urdf01_rviz/catkin_generated/installspace/urdf01_rvizConfig.cmake"
-    "/home/zzg/demo05_ws/build/urdf01_rviz/catkin_generated/installspace/urdf01_rvizConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/urdf01_rviz/catkin_generated/installspace/urdf01_rvizConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/urdf01_rviz/catkin_generated/installspace/urdf01_rvizConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/urdf01_rviz" TYPE FILE FILES "/home/zzg/demo05_ws/src/urdf01_rviz/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/urdf01_rviz" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/urdf01_rviz/package.xml")
 endif()
 

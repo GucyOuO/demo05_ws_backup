@@ -1,5 +1,5 @@
 <launch>
-    <arg name="map" default="nav.yaml" />
+    <arg name="map" default="random_complex_01.yaml" />
     <node pkg="map_server" 
     type="map_server" 
     name="map_server" 

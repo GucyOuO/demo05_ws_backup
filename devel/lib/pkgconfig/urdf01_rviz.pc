@@ -1,4 +1,4 @@
-prefix=/home/zzg/demo05_ws/devel
+prefix=/home/zzg/demo05_ws_backup/devel
 
 Name: urdf01_rviz
 Description: Description of urdf01_rviz

@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/arbotix_ros/arbotix_sensors
+# Install script for directory: /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_sensors
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,28 +38,28 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensors.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensors.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_sensors/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensorsConfig.cmake"
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensorsConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensorsConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_sensors/catkin_generated/installspace/arbotix_sensorsConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_sensors" TYPE FILE FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_sensors/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_sensors" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_sensors/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/zzg/demo05_ws/build/arbotix_ros/arbotix_sensors/catkin_generated/safe_execute_install.cmake")
+  include("/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_sensors/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/arbotix_sensors" TYPE PROGRAM FILES
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_sensors/bin/ir_ranger.py"
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_sensors/bin/max_sonar.py"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_sensors/bin/ir_ranger.py"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_sensors/bin/max_sonar.py"
     )
 endif()
 

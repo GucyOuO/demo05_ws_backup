@@ -67,14 +67,14 @@ set(urdf01_rviz_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(urdf01_rviz_SOURCE_PREFIX /home/zzg/demo05_ws/src/urdf01_rviz)
-  set(urdf01_rviz_DEVEL_PREFIX /home/zzg/demo05_ws/devel)
+  set(urdf01_rviz_SOURCE_PREFIX /home/zzg/demo05_ws_backup/src/urdf01_rviz)
+  set(urdf01_rviz_DEVEL_PREFIX /home/zzg/demo05_ws_backup/devel)
   set(urdf01_rviz_INSTALL_PREFIX "")
   set(urdf01_rviz_PREFIX ${urdf01_rviz_DEVEL_PREFIX})
 else()
   set(urdf01_rviz_SOURCE_PREFIX "")
   set(urdf01_rviz_DEVEL_PREFIX "")
-  set(urdf01_rviz_INSTALL_PREFIX /home/zzg/demo05_ws/install)
+  set(urdf01_rviz_INSTALL_PREFIX /home/zzg/demo05_ws_backup/install)
   set(urdf01_rviz_PREFIX ${urdf01_rviz_INSTALL_PREFIX})
 endif()
 
@@ -156,7 +156,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/zzg/demo05_ws/install/lib;/home/zzg/demo05_ws/devel/lib;/home/zzg/catkin_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/zzg/demo05_ws_backup/install/lib;/home/zzg/demo05_ws/devel/lib;/home/zzg/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

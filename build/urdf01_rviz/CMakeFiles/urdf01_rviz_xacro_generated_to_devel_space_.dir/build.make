@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zzg/demo05_ws/src
+CMAKE_SOURCE_DIR = /home/zzg/demo05_ws_backup/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zzg/demo05_ws/build
+CMAKE_BINARY_DIR = /home/zzg/demo05_ws_backup/build
 
 # Utility rule file for urdf01_rviz_xacro_generated_to_devel_space_.
 
@@ -63,10 +63,10 @@ urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/build: ur
 .PHONY : urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/build
 
 urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/clean:
-	cd /home/zzg/demo05_ws/build/urdf01_rviz && $(CMAKE_COMMAND) -P CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/cmake_clean.cmake
+	cd /home/zzg/demo05_ws_backup/build/urdf01_rviz && $(CMAKE_COMMAND) -P CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/cmake_clean.cmake
 .PHONY : urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/clean
 
 urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/depend:
-	cd /home/zzg/demo05_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws/src /home/zzg/demo05_ws/src/urdf01_rviz /home/zzg/demo05_ws/build /home/zzg/demo05_ws/build/urdf01_rviz /home/zzg/demo05_ws/build/urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/zzg/demo05_ws_backup/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws_backup/src /home/zzg/demo05_ws_backup/src/urdf01_rviz /home/zzg/demo05_ws_backup/build /home/zzg/demo05_ws_backup/build/urdf01_rviz /home/zzg/demo05_ws_backup/build/urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : urdf01_rviz/CMakeFiles/urdf01_rviz_xacro_generated_to_devel_space_.dir/depend
 

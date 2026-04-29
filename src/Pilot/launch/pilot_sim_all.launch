@@ -1,0 +1,24 @@
+<launch>
+  <!--
+    pilot_sim_all.launch
+    --------------------
+    一键启动：Gazebo + 四旋翼 + RViz。
+
+    常用：
+    roslaunch Pilot pilot_sim_all.launch
+    roslaunch Pilot pilot_sim_all.launch world:=/home/xxx/demo.world
+  -->
+
+  <arg name="world" default="$(find urdf02_gazebo)/worlds/random_complex_01.world"/>
+  <arg name="rviz_config" default="$(find Pilot)/config/pilot.rviz"/>
+
+  <!-- 先启动 Gazebo 和模型 -->
+  <include file="$(find Pilot)/launch/pilot_gazebo.launch">
+    <arg name="world" value="$(arg world)"/>
+  </include>
+
+  <!-- 再启动 TF 发布与 RViz，可在同一窗口看模型和雷达 -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config)"/>
+</launch>

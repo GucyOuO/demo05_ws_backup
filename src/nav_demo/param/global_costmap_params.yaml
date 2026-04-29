@@ -1,10 +1,20 @@
 global_costmap:
-  global_frame: map #地图坐标系
-  robot_base_frame: base_footprint #机器人坐标系
-  # 以此实现坐标变换
+  # 全局代价地图（global costmap）用于全局路径规划（从当前点到目标点）。
+  # 常以静态地图为基础，更新频率可低于局部代价地图。
 
-  update_frequency: 1.0 #代价地图更新频率
-  publish_frequency: 1.0 #代价地图的发布频率
-  transform_tolerance: 0.5 #等待坐标变换发布信息的超时时间
+  # -------------------- 1) 坐标系配置 --------------------
+  global_frame: map              # 全局地图坐标系（长期稳定）
+  robot_base_frame: base_footprint # 机器人底盘基坐标系
 
-  static_map: true # 是否使用一个地图或者地图服务器来初始化全局代价地图，如果不使用静态地图，这个参数为false.
+  # -------------------- 2) 刷新与发布频率 --------------------
+  update_frequency: 1.0    # 全局代价地图更新频率（Hz）
+  publish_frequency: 1.0   # 对外发布频率（Hz）
+  transform_tolerance: 0.5 # TF 等待超时（秒）
+
+  # -------------------- 3) 地图来源 --------------------
+  static_map: true         # 使用 map_server 提供的静态地图作为全局地图基础
+
+  # -------------------- 3) 膨胀层参数 --------------------
+  # 膨胀层会把障碍物周围区域赋予较高代价，让路径更安全，不贴障碍走。
+  inflation_radius: 0.5  # 膨胀半径（米）
+  cost_scaling_factor: 10.0 # 代价衰减系数：越大代价下降越快（远离障碍后更快变“便宜”）

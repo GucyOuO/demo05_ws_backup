@@ -65,9 +65,9 @@
     <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
 
     <!-- 可视化 -->
-    <node pkg="rviz" type="rviz" name="rviz" />
+    <!-- <node pkg="rviz" type="rviz" name="rviz" /> -->
     <!-- 可使用固定 rviz 配置文件 -->
-    <!--
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find my_nav_sum)/rviz/gmapping.rviz"/>
-    -->
+    
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nav_demo)/config/nav_test.rviz"/>
+
 </launch>

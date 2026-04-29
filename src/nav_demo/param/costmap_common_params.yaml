@@ -1,19 +1,31 @@
-#机器人几何参，如果机器人是圆形，设置 robot_radius,如果是其他形状设置 footprint
-robot_radius: 0.12 #圆形
-# footprint: [[-0.12, -0.12], [-0.12, 0.12], [0.12, 0.12], [0.12, -0.12]] #其他形状
+# 该文件是 global_costmap / local_costmap 共用参数。
+# 在 nav05_path.launch 中会被分别加载到两个命名空间。
 
-obstacle_range: 3.0 # 用于障碍物探测，比如: 值为 3.0，意味着检测到距离小于 3 米的障碍物时，就会引入代价地图
-raytrace_range: 3.5 # 用于清除障碍物，比如：值为 3.5，意味着清除代价地图中 3.5 米以外的障碍物
+# -------------------- 1) 机器人几何外形 --------------------
+# 二选一：圆形机器人用 robot_radius；非圆形机器人用 footprint（多边形）。
+robot_radius: 0.12 # 圆形近似半径（米）
+# footprint: [[-0.12, -0.12], [-0.12, 0.12], [0.12, 0.12], [0.12, -0.12]] # 非圆形示例
 
+# -------------------- 2) 障碍物探测与清除范围 --------------------
+obstacle_range: 3.0 # 障碍物“标记”最大距离（米），超出则不加入障碍
+raytrace_range: 3.5 # 障碍物“清除”最大距离（米），通常略大于 obstacle_range
 
-#膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物
-inflation_radius: 0.2
-#代价比例系数，越大则代价值越小
-cost_scaling_factor: 3.0
+# -------------------- 3) 膨胀层参数 --------------------
+# 膨胀层会把障碍物周围区域赋予较高代价，让路径更安全，不贴障碍走。
+inflation_radius: 0.2  # 膨胀半径（米）
+cost_scaling_factor: 3.0 # 代价衰减系数：越大代价下降越快（远离障碍后更快变“便宜”）
 
-#地图类型
+# -------------------- 4) 地图类型 --------------------
 map_type: costmap
-#导航包所需要的传感器
+
+# -------------------- 5) 传感器来源配置 --------------------
+# 可配置多个来源，如 scan, depth, pointcloud 等；多个来源用空格分隔。
 observation_sources: scan
-#对传感器的坐标系和数据进行配置。这个也会用于代价地图添加和清除障碍物。例如，你可以用激光雷达传感器用于在代价地图添加障碍物，再添加kinect用于导航和清除障碍物。
+
+# scan 来源的详细定义：
+# sensor_frame: 传感器坐标系，需能通过 TF 连到 robot_base_frame
+# data_type: 数据类型（LaserScan / PointCloud / PointCloud2）
+# topic: 订阅的话题名
+# marking: 是否把观测到的点标记为障碍
+# clearing: 是否使用射线清除空闲区域
 scan: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}

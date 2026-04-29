@@ -1,4 +1,4 @@
-prefix=/home/zzg/demo05_ws/install
+prefix=/home/zzg/demo05_ws_backup/install
 
 Name: arbotix_sensors
 Description: Description of arbotix_sensors

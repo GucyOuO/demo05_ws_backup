@@ -1,8 +1,8 @@
-prefix=/home/zzg/demo05_ws/devel
+prefix=/home/zzg/demo05_ws_backup/devel
 
 Name: arbotix_msgs
 Description: Description of arbotix_msgs
 Version: 0.11.0
-Cflags: -I/home/zzg/demo05_ws/devel/include
+Cflags: -I/home/zzg/demo05_ws_backup/devel/include
 Libs: -L${prefix}/lib 
 Requires: message_runtime std_msgs

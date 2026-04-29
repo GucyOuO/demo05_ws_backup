@@ -1,7 +1,7 @@
 # 地图图像文件路径（通常为 .pgm/.png）。
 # map_server 会读取该灰度图，并结合下面的阈值把像素转换为“占用/空闲/未知”栅格。
 # 这里建议使用绝对路径，避免 launch 工作目录变化导致找不到地图文件。
-image: /home/zzg/demo05_ws/src/nav_demo/map/nav.pgm
+image: /home/zzg/demo05_ws_backup/src/nav_demo/map/nav.pgm
 
 # 地图分辨率（单位：米/像素，m/pixel）。
 # 0.05 表示图像中每 1 个像素对应真实世界 5 厘米。

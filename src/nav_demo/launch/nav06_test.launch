@@ -1,10 +1,29 @@
 <launch>
+    <!--
+      导航总测试启动文件（定位 + 路径规划 + 可视化）
+      启动顺序逻辑：
+      1) 地图服务器（提供 /map）
+      2) AMCL 定位（发布 map->odom）
+      3) move_base 路径规划（全局+局部规划）
+      4) 机器人 TF 发布与 RViz 可视化
+    -->
+
+    <!-- 1) 地图服务：读取 nav.yaml / nav.pgm，发布静态地图 /map -->
     <include file="$(find nav_demo)/launch/nav03_map_server.launch" />
+
+    <!-- 2) AMCL：融合激光+里程计，估计机器人在 map 坐标系中的位姿 -->
     <include file="$(find nav_demo)/launch/nav04_amcl.launch" />
+
+    <!-- 3) move_base：加载 costmap 与局部规划器参数，执行路径规划与避障 -->
     <include file="$(find nav_demo)/launch/nav05_path.launch" />
 
+    <!-- 4) joint_state_publisher：发布 /joint_states（仿真或无硬件回传时常用） -->
     <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+
+    <!-- 5) robot_state_publisher：根据 robot_description + /joint_states 发布机器人连杆 TF -->
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <!-- 6) RViz：可视化地图、激光、TF、路径；可用 2D Nav Goal 下发目标点 -->
     <node pkg="rviz" type="rviz" name="rviz" />
 
 </launch>

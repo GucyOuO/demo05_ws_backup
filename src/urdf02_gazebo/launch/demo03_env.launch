@@ -1,5 +1,6 @@
 <launch>
   <arg name="start_gazebo" default="true" />
+  <arg name="world" default="random_complex_01.world" />
   <arg name="model_name" default="mycar" />
   <arg name="x" default="0.0" />
   <arg name="y" default="0.0" />
@@ -10,7 +11,7 @@
 
   <!-- 启动 Gazebo 空场景（如果已手动启动 Gazebo，可将 start_gazebo:=false） -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg start_gazebo)">
-    <arg name="world_name" value="$(find urdf02_gazebo)/worlds/box_house.world" />
+    <arg name="world_name" value="$(find urdf02_gazebo)/worlds/$(arg world)" />
     <arg name="paused" value="false" />
     <arg name="use_sim_time" value="true" />
     <arg name="gui" value="true" />

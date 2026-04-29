@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zzg/demo05_ws/src
+CMAKE_SOURCE_DIR = /home/zzg/demo05_ws_backup/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zzg/demo05_ws/build
+CMAKE_BINARY_DIR = /home/zzg/demo05_ws_backup/build
 
 # Utility rule file for bond_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/build: bond_generate_mes
 .PHONY : urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/build
 
 urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/clean:
-	cd /home/zzg/demo05_ws/build/urdf02_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/zzg/demo05_ws_backup/build/urdf02_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/clean
 
 urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/depend:
-	cd /home/zzg/demo05_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws/src /home/zzg/demo05_ws/src/urdf02_gazebo /home/zzg/demo05_ws/build /home/zzg/demo05_ws/build/urdf02_gazebo /home/zzg/demo05_ws/build/urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/zzg/demo05_ws_backup/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws_backup/src /home/zzg/demo05_ws_backup/src/urdf02_gazebo /home/zzg/demo05_ws_backup/build /home/zzg/demo05_ws_backup/build/urdf02_gazebo /home/zzg/demo05_ws_backup/build/urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : urdf02_gazebo/CMakeFiles/bond_generate_messages_cpp.dir/depend
 

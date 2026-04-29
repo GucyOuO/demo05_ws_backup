@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/arbotix_ros/arbotix_python
+# Install script for directory: /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_python
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,29 +38,29 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_python.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_python.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_python/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_pythonConfig.cmake"
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_pythonConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_pythonConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_python/catkin_generated/installspace/arbotix_pythonConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_python" TYPE FILE FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_python/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_python" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_python/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/zzg/demo05_ws/build/arbotix_ros/arbotix_python/catkin_generated/safe_execute_install.cmake")
+  include("/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_python/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_python" TYPE DIRECTORY FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_python/demos")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_python" TYPE DIRECTORY FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_python/demos")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/arbotix_python" TYPE PROGRAM FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_python/bin/arbotix_driver")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/arbotix_python" TYPE PROGRAM FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_python/bin/arbotix_driver")
 endif()
 

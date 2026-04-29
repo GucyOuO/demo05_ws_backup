@@ -1,27 +1,32 @@
 TrajectoryPlannerROS:
+  # 本文件是 move_base 的局部规划器参数（TrajectoryPlannerROS）。
+  # 作用：在“全局路径”基础上，结合局部障碍物与机器人运动学，
+  #      实时计算短时间内可执行的速度指令 (cmd_vel)。
 
-# Robot Configuration Parameters
-  max_vel_x: 0.5 # X 方向最大速度
-  min_vel_x: 0.1 # X 方向最小速速
+  # -------------------- 1) 机器人速度参数（单位：m/s, rad/s） --------------------
+  max_vel_x: 0.5      # 机器人前进最大线速度（X 正方向）
+  min_vel_x: 0.1      # 机器人前进最小线速度；过大可能导致贴近目标时不易慢速微调
 
-  max_vel_theta:  1.0 # 
-  min_vel_theta: -1.0
-  min_in_place_vel_theta: 1.0
+  max_vel_theta: 1.0  # 最大角速度（绕 Z 轴旋转）
+  min_vel_theta: -1.0 # 最小角速度；当前为负值，表示允许采样到反向旋转速度
+  min_in_place_vel_theta: 1.0  # 原地旋转时使用的最小角速度绝对值
 
-  acc_lim_x: 1.0 # X 加速限制
-  acc_lim_y: 0.0 # Y 加速限制
-  acc_lim_theta: 0.6 # 角速度加速限制
+  # -------------------- 2) 加速度限制（单位：m/s^2, rad/s^2） --------------------
+  acc_lim_x: 1.0      # X 方向最大线加速度限制（越大响应越快，但更容易抖）
+  acc_lim_y: 0.0      # Y 方向加速度限制；差速机器人一般保持 0
+  acc_lim_theta: 0.6  # 角加速度限制（旋转“起步/刹车”快慢）
 
-# Goal Tolerance Parameters，目标公差
-  xy_goal_tolerance: 0.10
-  yaw_goal_tolerance: 0.05
+  # -------------------- 3) 到达目标判定容差 --------------------
+  # 当机器人与目标点距离/角度误差小于下列阈值时，判定“到达目标”。
+  xy_goal_tolerance: 0.10  # 位置容差（米）
+  yaw_goal_tolerance: 0.05 # 朝向容差（弧度），约 2.9 度
 
-# Differential-drive robot configuration
-# 是否是全向移动机器人
-  holonomic_robot: false
+  # -------------------- 4) 机器人运动学类型 --------------------
+  holonomic_robot: false   # false=非全向（差速/阿克曼）；true=全向底盘
 
-# Forward Simulation Parameters，前进模拟参数
-  sim_time: 0.8
-  vx_samples: 18
-  vtheta_samples: 20
-  sim_granularity: 0.05
+  # -------------------- 5) 前向仿真采样参数 --------------------
+  # 局部规划器会对不同速度组合进行“短时前向模拟”，打分后选最优速度。
+  sim_time: 0.8        # 每条候选轨迹的仿真时长（秒）
+  vx_samples: 18       # 线速度采样数；越大越细致，但CPU开销更高
+  vtheta_samples: 20   # 角速度采样数；越大越容易找到可行转向
+  sim_granularity: 0.05 # 仿真轨迹离散步长（米）；越小碰撞检测越精细

@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/Analog.h"
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/Digital.h"
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/Enable.h"
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/Relax.h"
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/SetSpeed.h"
-  "/home/zzg/demo05_ws/devel/include/arbotix_msgs/SetupChannel.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/Analog.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/Digital.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/Enable.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/Relax.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/SetSpeed.h"
+  "/home/zzg/demo05_ws_backup/devel/include/arbotix_msgs/SetupChannel.h"
   "CMakeFiles/arbotix_msgs_generate_messages_cpp"
 )
 

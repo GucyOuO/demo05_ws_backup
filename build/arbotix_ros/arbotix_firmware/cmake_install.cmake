@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/arbotix_ros/arbotix_firmware
+# Install script for directory: /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_firmware
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmware.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmware.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_firmware/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmwareConfig.cmake"
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmwareConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmwareConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_firmware/catkin_generated/installspace/arbotix_firmwareConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_firmware" TYPE FILE FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_firmware/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_firmware" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_firmware/package.xml")
 endif()
 

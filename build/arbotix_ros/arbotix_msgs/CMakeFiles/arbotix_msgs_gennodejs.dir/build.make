@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zzg/demo05_ws/src
+CMAKE_SOURCE_DIR = /home/zzg/demo05_ws_backup/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zzg/demo05_ws/build
+CMAKE_BINARY_DIR = /home/zzg/demo05_ws_backup/build
 
 # Utility rule file for arbotix_msgs_gennodejs.
 
@@ -63,10 +63,10 @@ arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/build: arbotix_ms
 .PHONY : arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/build
 
 arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/clean:
-	cd /home/zzg/demo05_ws/build/arbotix_ros/arbotix_msgs && $(CMAKE_COMMAND) -P CMakeFiles/arbotix_msgs_gennodejs.dir/cmake_clean.cmake
+	cd /home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_msgs && $(CMAKE_COMMAND) -P CMakeFiles/arbotix_msgs_gennodejs.dir/cmake_clean.cmake
 .PHONY : arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/clean
 
 arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/depend:
-	cd /home/zzg/demo05_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws/src /home/zzg/demo05_ws/src/arbotix_ros/arbotix_msgs /home/zzg/demo05_ws/build /home/zzg/demo05_ws/build/arbotix_ros/arbotix_msgs /home/zzg/demo05_ws/build/arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/zzg/demo05_ws_backup/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zzg/demo05_ws_backup/src /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_msgs /home/zzg/demo05_ws_backup/build /home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_msgs /home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : arbotix_ros/arbotix_msgs/CMakeFiles/arbotix_msgs_gennodejs.dir/depend
 

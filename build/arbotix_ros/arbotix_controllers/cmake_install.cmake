@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers
+# Install script for directory: /home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,26 +38,26 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllers.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllers.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_controllers/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllersConfig.cmake"
-    "/home/zzg/demo05_ws/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllersConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllersConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/arbotix_ros/arbotix_controllers/catkin_generated/installspace/arbotix_controllersConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_controllers" TYPE FILE FILES "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/arbotix_controllers" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/arbotix_controllers" TYPE PROGRAM FILES
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers/bin/gripper_controller"
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers/bin/one_side_gripper_controller.py"
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers/bin/parallel_gripper_controller.py"
-    "/home/zzg/demo05_ws/src/arbotix_ros/arbotix_controllers/bin/parallel_single_servo_controller.py"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers/bin/gripper_controller"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers/bin/one_side_gripper_controller.py"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers/bin/parallel_gripper_controller.py"
+    "/home/zzg/demo05_ws_backup/src/arbotix_ros/arbotix_controllers/bin/parallel_single_servo_controller.py"
     )
 endif()
 

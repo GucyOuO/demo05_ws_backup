@@ -1,0 +1,112 @@
+demo05_ws 使用教程（中文）
+
+一、工程说明
+本工作区主要包含两部分：
+1) urdf02_gazebo：机器人模型与仿真环境相关启动文件。
+2) nav_demo：SLAM 建图、地图保存、AMCL 定位、move_base 导航。
+
+建议使用 Ubuntu + ROS1（Noetic）环境。
+
+
+二、首次使用（每次新终端也建议执行）
+1. 进入工作区
+cd /home/zzg/demo05_ws
+
+2. 编译
+catkin_make
+
+3. 刷新环境变量
+source devel/setup.bash
+
+
+三、常用启动流程
+
+流程 A：一键“建图 + 规划”（自动模式）
+用途：边跑边建图，并同时启用路径规划。
+命令：
+roslaunch nav_demo nav07_slam_auto.launch
+
+说明：
+- 该文件会包含：
+  - nav01_slam.launch（gmapping 建图）
+  - nav05_path.launch（move_base 路径规划）
+
+
+流程 B：只做 SLAM 建图
+命令：
+roslaunch nav_demo nav01_slam.launch
+
+说明：
+- 需要已有 /scan、/odom、TF（至少 odom -> base_footprint）。
+- RViz 中可以观察地图实时生成。
+
+
+流程 C：保存地图
+在建图完成后，另开一个终端执行：
+cd /home/zzg/demo05_ws
+source devel/setup.bash
+roslaunch nav_demo nav02_map_save.launch
+
+说明：
+- 默认保存到：src/nav_demo/map/nav.pgm 和 nav.yaml
+
+
+流程 D：加载已保存地图 + AMCL + move_base 导航（推荐测试入口）
+命令：
+roslaunch nav_demo nav06_test.launch
+
+说明：
+- nav06_test.launch 会依次启动：
+  - nav03_map_server.launch（地图服务）
+  - nav04_amcl.launch（定位）
+  - nav05_path.launch（导航规划）
+  - joint_state_publisher / robot_state_publisher / rviz
+- 在 RViz 用“2D Pose Estimate”先给初始位姿，再用“2D Nav Goal”下发目标点。
+
+
+四、参数文件位置（调参入口）
+1) 局部规划器参数：
+src/nav_demo/param/base_local_planner_params.yaml
+
+2) 局部代价地图参数：
+src/nav_demo/param/local_costmap_params.yaml
+
+3) 全局代价地图参数：
+src/nav_demo/param/global_costmap_params.yaml
+
+4) 全局/局部共用代价地图参数：
+src/nav_demo/param/costmap_common_params.yaml
+
+
+五、你现在使用的规划算法（当前配置）
+1) 局部规划：TrajectoryPlannerROS
+2) 全局规划：未显式设置时通常使用 move_base 默认的 navfn/NavfnROS
+
+
+六、常见问题排查
+1) RViz 看不到机器人/TF 报错
+- 检查 robot_description 是否已加载。
+- 检查是否有 robot_state_publisher 与 joint_state_publisher。
+
+2) AMCL 不收敛或定位漂移大
+- 先用“2D Pose Estimate”给接近真实的初始位姿。
+- 检查激光话题是否为 /scan，frame 是否与参数一致（如 laser）。
+
+3) move_base 不出速度
+- 检查 /cmd_vel 是否有输出。
+- 检查代价地图是否正常更新（障碍物是否进入 costmap）。
+- 检查 TF 链是否完整：map -> odom -> base_footprint。
+
+4) 无法找到地图文件
+- 检查 nav03_map_server.launch 中 map 参数指向的 yaml 是否存在。
+- 尽量使用绝对路径或 $(find 包名)/相对路径。
+
+
+七、建议的日常使用顺序
+1) 先跑建图：nav01_slam.launch
+2) 保存地图：nav02_map_save.launch
+3) 再跑定位导航：nav06_test.launch
+
+如果只是演示全流程，可直接尝试：
+roslaunch nav_demo nav07_slam_auto.launch
+

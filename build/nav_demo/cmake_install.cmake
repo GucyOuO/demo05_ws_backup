@@ -1,8 +1,8 @@
-# Install script for directory: /home/zzg/demo05_ws/src/nav_demo
+# Install script for directory: /home/zzg/demo05_ws_backup/src/nav_demo
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zzg/demo05_ws_backup/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws/build/nav_demo/catkin_generated/installspace/nav_demo.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zzg/demo05_ws_backup/build/nav_demo/catkin_generated/installspace/nav_demo.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/nav_demo/cmake" TYPE FILE FILES
-    "/home/zzg/demo05_ws/build/nav_demo/catkin_generated/installspace/nav_demoConfig.cmake"
-    "/home/zzg/demo05_ws/build/nav_demo/catkin_generated/installspace/nav_demoConfig-version.cmake"
+    "/home/zzg/demo05_ws_backup/build/nav_demo/catkin_generated/installspace/nav_demoConfig.cmake"
+    "/home/zzg/demo05_ws_backup/build/nav_demo/catkin_generated/installspace/nav_demoConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/nav_demo" TYPE FILE FILES "/home/zzg/demo05_ws/src/nav_demo/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/nav_demo" TYPE FILE FILES "/home/zzg/demo05_ws_backup/src/nav_demo/package.xml")
 endif()
 

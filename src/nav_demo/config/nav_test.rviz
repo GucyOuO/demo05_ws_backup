@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /Map_global1/Status1
+        - /Map_local1
       Splitter Ratio: 0.5009980201721191
     Tree Height: 653
   - Class: rviz/Selection
@@ -26,7 +27,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: ""
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -220,22 +221,22 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map_global
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
-      Color Scheme: costmap
+      Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map_local
       Topic: /move_base/local_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -264,7 +265,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 10.039884567260742
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -272,17 +273,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -4.440144062042236
+        Y: 0.20670711994171143
+        Z: 0.5836220383644104
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9597969055175781
+      Pitch: 1.4397964477539062
       Target Frame: <Fixed Frame>
-      Yaw: 6.188582420349121
+      Yaw: 6.153580188751221
     Saved: ~
 Window Geometry:
   Displays:
@@ -300,5 +301,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1917
-  X: 60
-  Y: 54
+  X: -392
+  Y: 267

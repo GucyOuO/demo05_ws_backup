@@ -1,0 +1,23 @@
+<launch>
+  <!--
+    pilot_rviz.launch
+    -----------------
+    只启动 RViz 进行模型可视化（不启动 Gazebo）。
+    适合先学 TF / 机器人结构。
+  -->
+
+  <arg name="model" default="$(find Pilot)/urdf/quadrotor.urdf.xacro"/>
+  <arg name="rviz_config" default="$(find Pilot)/config/pilot.rviz"/>
+
+  <!-- 发布 robot_description -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+  <!-- 发布关节状态（这里没有真实关节驱动，主要用于保持链路完整） -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+
+  <!-- 根据 robot_description + joint_states 发布 TF -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+  <!-- 启动 RViz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config)"/>
+</launch>

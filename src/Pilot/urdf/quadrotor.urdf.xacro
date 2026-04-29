@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<!--
+  quadrotor.urdf.xacro（教学注释版）
+  ----------------------------------
+  这个文件定义了四旋翼的：
+  1) 几何结构（方形机身 + 4机臂 + 4电机 + 4桨）
+  2) 传感器（顶部360激光雷达）
+  3) 控制插件（读取 cmd_vel / cmd_attitude 并输出电机推力）
+
+  建议学习顺序：
+  A. 先看属性区（尺寸/质量）
+  B. 看 base_link（主机体）
+  C. 看 arm_module 宏（复用思想）
+  D. 看 lidar 与 plugin 区（仿真接口）
+-->
+<robot name="pilot_quadrotor" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ==================== 参数区（便于统一调尺寸） ==================== -->
+  <xacro:property name="body_size" value="0.22"/>  <!-- 方形机身边长（m） -->
+  <xacro:property name="body_h" value="0.07"/>     <!-- 机身高度（m） -->
+  <xacro:property name="arm_len" value="0.22"/>    <!-- 机臂长度（m） -->
+  <xacro:property name="arm_r" value="0.012"/>     <!-- 机臂半径（m） -->
+  <xacro:property name="motor_r" value="0.03"/>    <!-- 电机圆柱半径（m） -->
+  <xacro:property name="motor_h" value="0.02"/>    <!-- 电机圆柱高度（m） -->
+  <xacro:property name="prop_r" value="0.09"/>     <!-- 桨叶盘半径（m，仅可视化） -->
+  <xacro:property name="prop_h" value="0.004"/>    <!-- 桨叶盘厚度（m） -->
+
+  <!-- ==================== 材质区（只影响显示） ==================== -->
+  <material name="body_gray"><color rgba="0.2 0.2 0.23 1"/></material>
+  <material name="arm_blue"><color rgba="0.1 0.45 0.9 1"/></material>
+  <material name="arm_red"><color rgba="0.85 0.15 0.15 1"/></material>
+  <material name="prop_black"><color rgba="0.08 0.08 0.08 1"/></material>
+  <material name="lidar_green"><color rgba="0.1 0.8 0.2 1"/></material>
+
+  <!-- ==================== 机身主链接 base_link ==================== -->
+  <link name="base_link">
+    <!-- inertial: 质量和惯量，直接影响动力学 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.4"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.03"/>
+    </inertial>
+
+    <!-- visual: 在 RViz/Gazebo 中看到的外观 -->
+    <visual>
+      <geometry><box size="${body_size} ${body_size} ${body_h}"/></geometry>
+      <material name="body_gray"/>
+    </visual>
+
+    <!-- collision: 碰撞体。可与 visual 不同，这里保持一致便于理解 -->
+    <collision>
+      <geometry><box size="${body_size} ${body_size} ${body_h}"/></geometry>
+    </collision>
+  </link>
+
+  <!-- IMU 挂载点：很多飞控/滤波会需要 imu_link -->
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!--
+    ==================== 机臂模块宏 ====================
+    通过宏复用：每个机臂包含 arm + motor + prop 三部分。
+    参数：
+    - name: 名称前缀
+    - ox/oy: 机臂根部在 base_link 下的位置
+    - yaw: 机臂朝向角（绕 z）
+    - color: 显示颜色
+  -->
+  <xacro:macro name="arm_module" params="name ox oy yaw color">
+    <link name="${name}_arm">
+      <visual>
+        <!-- 圆柱默认沿 z，这里绕 y 转90度让它沿 x 方向伸出 -->
+        <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+        <geometry><cylinder radius="${arm_r}" length="${arm_len}"/></geometry>
+        <material name="${color}"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+        <geometry><cylinder radius="${arm_r}" length="${arm_len}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.08"/>
+        <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0001"/>
+      </inertial>
+    </link>
+    <joint name="${name}_arm_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${name}_arm"/>
+      <origin xyz="${ox} ${oy} 0" rpy="0 0 ${yaw}"/>
+    </joint>
+
+    <!-- 电机（推力施加点） -->
+    <link name="${name}_motor">
+      <visual>
+        <geometry><cylinder radius="${motor_r}" length="${motor_h}"/></geometry>
+        <material name="${color}"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="${motor_r}" length="${motor_h}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.05"/>
+        <inertia ixx="0.00005" ixy="0" ixz="0" iyy="0.00005" iyz="0" izz="0.00008"/>
+      </inertial>
+    </link>
+    <joint name="${name}_motor_joint" type="fixed">
+      <parent link="${name}_arm"/>
+      <child link="${name}_motor"/>
+      <origin xyz="${arm_len/2.0} 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- 桨叶可视化（学习阶段先不做空气动力学细节） -->
+    <link name="${name}_prop">
+      <visual>
+        <geometry><cylinder radius="${prop_r}" length="${prop_h}"/></geometry>
+        <material name="prop_black"/>
+      </visual>
+    </link>
+    <joint name="${name}_prop_joint" type="continuous">
+      <parent link="${name}_motor"/>
+      <child link="${name}_prop"/>
+      <origin xyz="0 0 ${motor_h/2.0 + prop_h/2.0}" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- 四个机臂：X 构型 -->
+  <xacro:arm_module name="front_left"  ox="${ body_size/2.0}" oy="${ body_size/2.0}" yaw="0.7854"  color="arm_red"/>
+  <xacro:arm_module name="front_right" ox="${ body_size/2.0}" oy="${-body_size/2.0}" yaw="-0.7854" color="arm_blue"/>
+  <xacro:arm_module name="rear_left"   ox="${-body_size/2.0}" oy="${ body_size/2.0}" yaw="2.3562"  color="arm_blue"/>
+  <xacro:arm_module name="rear_right"  ox="${-body_size/2.0}" oy="${-body_size/2.0}" yaw="-2.3562" color="arm_red"/>
+
+  <!-- ==================== 顶部 360° 激光雷达 ==================== -->
+  <link name="lidar_link">
+    <visual>
+      <geometry><cylinder radius="0.04" length="0.03"/></geometry>
+      <material name="lidar_green"/>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.04" length="0.03"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.08"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0 0 ${body_h/2.0 + 0.025}" rpy="0 0 0"/>
+  </joint>
+
+  <!--
+    Gazebo 雷达传感器：
+    - 720 samples 覆盖 360°
+    - 发布话题 /scan
+    - frame 为 lidar_link
+  -->
+  <gazebo reference="lidar_link">
+    <sensor type="ray" name="top_360_lidar">
+      <pose>0 0 0 0 0 0</pose>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>12</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>25.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>lidar_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!--
+    ==================== 四旋翼控制插件参数 ====================
+    这些参数会被 quadrotor_controller_plugin.cpp 读取。
+
+    话题约定（namespace=pilot）：
+    - /pilot/cmd_vel      geometry_msgs/Twist
+    - /pilot/cmd_attitude geometry_msgs/Vector3 (x=roll,y=pitch,z=yaw)
+    - /pilot/motor_thrust std_msgs/Float32MultiArray
+  -->
+  <gazebo>
+    <plugin name="pilot_quadrotor_controller" filename="libpilot_quadrotor_controller.so">
+      <robot_namespace>pilot</robot_namespace>
+      <cmd_vel_topic>cmd_vel</cmd_vel_topic>
+      <cmd_att_topic>cmd_attitude</cmd_att_topic>
+
+      <!-- 几何相关 -->
+      <arm_length>${arm_len}</arm_length>
+      <yaw_moment_coeff>0.02</yaw_moment_coeff>
+
+      <!-- 电机饱和上限（单个电机最大推力，单位近似N） -->
+      <max_motor_thrust>20.0</max_motor_thrust>
+
+      <!-- 速度环 -->
+      <kp_xy>2.2</kp_xy>
+      <kp_vz>4.2</kp_vz>
+
+      <!-- 姿态/偏航 -->
+      <kp_roll>7.0</kp_roll>
+      <kd_roll>1.6</kd_roll>
+      <kp_pitch>7.0</kp_pitch>
+      <kd_pitch>1.6</kd_pitch>
+      <kp_yaw>4.0</kp_yaw>
+      <kd_yaw>0.8</kd_yaw>
+      <kp_yaw_rate>1.5</kp_yaw_rate>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+</robot>

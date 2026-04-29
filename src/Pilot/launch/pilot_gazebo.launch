@@ -1,0 +1,38 @@
+<launch>
+  <!--
+    pilot_gazebo.launch
+    -------------------
+    只启动 Gazebo 并把四旋翼刷进仿真世界。
+
+    用法：
+    roslaunch Pilot pilot_gazebo.launch
+    roslaunch Pilot pilot_gazebo.launch world:=/abs/path/to/xxx.world x:=1.0 y:=2.0 z:=0.8
+  -->
+
+  <!-- 模型文件路径（xacro） -->
+  <arg name="model" default="$(find Pilot)/urdf/quadrotor.urdf.xacro"/>
+
+  <!-- Gazebo 世界文件 -->
+  <arg name="world" default="$(find urdf02_gazebo)/worlds/random_complex_01.world"/>
+
+  <!-- 初始出生位姿 -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.5"/>
+
+  <!-- 把 xacro 解析后的 URDF 放到参数服务器：/robot_description -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+  <!-- 启动 Gazebo 空场景，并把 world 换成我们的场景 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+  </include>
+
+  <!-- 从 /robot_description 把模型生成到 Gazebo 中 -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_pilot_quadrotor" output="screen"
+        args="-urdf -param robot_description -model pilot_quadrotor -x $(arg x) -y $(arg y) -z $(arg z)"/>
+</launch>
