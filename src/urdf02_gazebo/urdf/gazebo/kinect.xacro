@@ -1,9 +1,9 @@
 <robot name="my_sensors" xmlns:xacro="http://wiki.ros.org/xacro">
     <!--
       Gazebo 深度相机插件配置（Kinect/OpenNI）
-      这里把雷达支架 link：support 当作深度相机挂载点
+      深度相机挂在前方 camera link 上，避免装在 support 支架时拍到小车自身的蓝色相机外壳。
     -->
-    <gazebo reference="support">
+    <gazebo reference="camera">
       <!-- depth 传感器：可输出 RGB、Depth、PointCloud -->
       <sensor type="depth" name="kinect_depth">
         <!-- 是否常开 -->
@@ -44,7 +44,7 @@
           <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
 
           <!-- TF 坐标系：与挂载 link 一致 -->
-          <frameName>support_depth</frameName>
+          <frameName>camera</frameName>
 
           <!-- 双目/深度模型参数与畸变参数 -->
           <baseline>0.1</baseline>

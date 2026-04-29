@@ -314,9 +314,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Red</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -369,9 +371,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Yellow</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>1 1 0 1</ambient>
+            <diffuse>1 1 0 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -536,9 +540,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Green</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>0 1 0 1</ambient>
+            <diffuse>0 1 0 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -589,9 +595,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Blue</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -644,9 +652,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Purple</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>0.7 0 1 1</ambient>
+            <diffuse>0.7 0 1 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -699,9 +709,11 @@
           </geometry>
           <material>
             <script>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/Turquoise</name>
               <uri>file://media/materials/scripts/gazebo.material</uri>
             </script>
+            <ambient>0 1 1 1</ambient>
+            <diffuse>0 1 1 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
